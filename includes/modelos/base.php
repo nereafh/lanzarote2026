@@ -10,7 +10,7 @@ class Base
             SELECT COLUMN_NAME
             FROM INFORMATION_SCHEMA.COLUMNS   
             WHERE table_name = '". $this->tabla ."' 
-            AND   table_schema = '". BBDD::$baseDatos . "';
+            AND   table_schema = '". BBDD::getInstancia()->getBaseDatos() . "';
         ");
 
         while ($registro = $query->recuperar())
@@ -82,7 +82,7 @@ class Base
         $updates = '';
         foreach($datos as $clave => $valor)
         {
-            $updates = "{$clave} = '{$valor}',";
+            $updates .= "{$clave} = '{$valor}',"; //concatenación
         }
 
         $sql = "
